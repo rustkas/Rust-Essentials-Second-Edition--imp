@@ -1,7 +1,7 @@
 # Rust-Essentials-Second-Edition
 Implementation of code examples
 
-** Notes **
+*Notes*
 
 # HOWTO
 
