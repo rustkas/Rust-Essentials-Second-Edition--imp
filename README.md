@@ -11,6 +11,9 @@ Implementation of code examples
 
 ## Run applications
 ```cargo run --bin concat```
+
 ```cargo run --bin format```
+
 ```cargo run --bin default```
+
 ```cargo run --bin constractor```
