@@ -1,6 +1,8 @@
 # Rust-Essentials-Second-Edition
 Implementation of code examples
 
+** Notes **
+
 # HOWTO
 
 ## Create new project
