@@ -6,4 +6,5 @@ fn main() {
     run = 78000
 }
 ```
-[Run in Rust Playground](https://play.rust-lang.org/?gist=f0739dc8064b09d1358e05171118cea2&version=stable&mode=debug&edition=2015)
+[Run in Rust Playground](https://gist.github.com/rust-play/32e4d35b824c38318668484c5fc82432&version=stable&mode=debug&edition=2021)
+
