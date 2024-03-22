@@ -8,7 +8,7 @@ static GAME_NAME: &str = "Monster Attack";
 fn main() {
 	const MYPI: f32 = 3.14;
 	println!("{}", MYPI);
-    println!("{}", GAME_NAME);
+    	println!("{}", GAME_NAME);
         // use the PI value from the standard library:
 	println!("{}", consts::PI);
 }
