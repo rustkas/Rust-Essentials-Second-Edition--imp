@@ -1,44 +1,36 @@
 ```rust
-static MAX_HEALTH: i32 = 100;
-static GAME_NAME: &str = "Monster Attack";
-
+#[allow(unused_variables, unused_assignments)]
 fn main() {
-	const MYPI: f32 = 3.14;
+	let energy = 5; // value 5 is bound to variable energy
+	// splitting declaration and initialization:
+	let _energy2;
+	_energy2 = 5;
+	let _energy = 5; // no warning unused variable
+	// let energy = 5usize; // energy is now an unsigned integer
+	let copy_energy = energy;
+	println!("Your energy is {}", energy);
+	let level_title = "Level 1";
+	let dead = false;
+	let magic_number = 3.14f32;
 
-	println!("The Game you are playing is called {}.", GAME_NAME);
-	println!("You start with {} health points.", MAX_HEALTH);
-	println!("In the Game {0} you start with {1} % health, yes you read it correctly: {1} points!", 
-		GAME_NAME, MAX_HEALTH);
-	println!("You have {points} % health", points = 70);
+    let energy = "Abundant"; // a new energy variable
+	// an _ can be used to separate the digits from the type to improve readability:
+	// let magic_number = 3.14_f32; 
+	let empty = (); // the value of the unit type ()
 
-	// formatting:
-	println!("MAX_HEALTH is {:x} in hexadecimal", MAX_HEALTH);
-	println!("MAX_HEALTH is {:b} in binary", MAX_HEALTH);
-	println!( "Two written in binary is {0:b}", 2);
+	// changing values:
+	// energy = 25; // error: re-assignment of immutable variable `energy`
+	let mut fuel = 34;
+	fuel = 60;
 
-	println!("pi is {:e} in floating point notation", MYPI);
-
-	let long_decimal: f64 = 0.56545874854551248754;
-	println!("{:.3}", long_decimal); // 0.565
-
-	let number = 42i32;
-	println!("{:08}", number); // 00000042
-	println!("{:8}", number);  //       42
-
-	let str = format!("You have {points} % health", points = 70);
-	println!("{}", str); // str now contains the value "You have 70 % health"
+	let n; // error: type annotations needed, consider giving `energy2` a type, cannot infer type for `_`
+	// println!("n is: {}", n); // error: use of possibly uninitialized variable 
+	n = -2;
+	let n: i32;
+	// let n: i32 = -2; // n is a binding of type i32 and with value -2
+	let x = 42u8;
+	let magic_number = 3.14f64;
+	// fn2() // cannot find function `fn2` in this scope - not found in this scope
 }
-// The Game you are playing is called Monster Attack.
-// You start with 100 health points.
-// In the Game Monster Attack you start with 100 % health, yes you heard it correct: 100 points!
-// You have 70 % health
-// MAX_HEALTH is 64 in hexadecimal
-// MAX_HEALTH is 1100100 in binary
-// Two written in binary is 10
-// pi is 3.14e0 in floating point notation
-// 0.565
-// 00000042
-//      42
-// You have 70 % health
 ```
-[Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=b33caeb2e3ef87e6d6c96a25064b8574&version=stable)
+[Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=ce925c57ac411f64ff4e5ca598cd2214&version=stable)
