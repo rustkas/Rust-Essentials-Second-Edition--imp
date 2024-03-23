@@ -1,5 +1,5 @@
 # Rust-Essentials-Second-Edition
-Implementation of code examples
+Implementation of code examples fixing warning messages md.
 
 *Notes*
 
