@@ -1,5 +1,4 @@
 ```rust
-#[allow(unused_variables)]
 fn main() {
     // Using local inference, the compiler knows that `elem` has type u64 (machine-dependent)
     let elem = 42;
@@ -16,4 +15,4 @@ fn main() {
 }
 // [42]
 ```
-[Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=b80e4bf93a9cdefd68f1cc5e6c7c53dd&version=stable)
+[Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=63ba5b068411e6b60c329de9df7adb46&version=stable)
