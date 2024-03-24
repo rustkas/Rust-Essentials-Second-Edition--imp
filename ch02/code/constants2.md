@@ -23,7 +23,7 @@ fn main() {
     let mut fuel = 34;
     fuel = 60;
 
-    let n; // error: type annotations needed, consider giving `energy2` a type, cannot infer type for `_`
+    let n; 
            // println!("n is: {}", n); // error: use of possibly uninitialized variable
     n = -2;
     let n: i32;
@@ -34,4 +34,4 @@ fn main() {
 }
 
 ```
-[Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=ce925c57ac411f64ff4e5ca598cd2214&version=stable)
+[Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=a70ec109124a736adc0634ee55850322&version=stable)
