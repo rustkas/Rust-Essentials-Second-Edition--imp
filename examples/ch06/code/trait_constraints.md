@@ -1,66 +1,48 @@
 ```rust
-fn main() {
-    // CONSUMERS:
-    println!("CONSUMERS: ");
-    // collect:
-    let rng = 0..1000;
-    let rngvec: Vec<i32> = rng.collect();
-    // alternative:
-    // let rngvec = rng.collect::<Vec<i32>>();
-    println!("{:?}", rngvec);
+extern crate num;
 
-    // find:
-    let mut rng = 0..1000;
-    let forty_two = rng.find(|n| *n >= 42);
-    println!("{:?}", forty_two); // Some(42)
-                                 // find needs a mutable variable, and moves it
-
-    // ADAPTERS:
-    // filter:
-    println!("ADAPTERS: ");
-    println!("FILTER:");
-    rng = 0..1000;
-    let rng_even = rng.filter(|n| is_even(*n)).collect::<Vec<i32>>();
-    println!("{:?}", rng_even);
-
-    // alternative without collect:
-    let rng = 1..100;
-    let rng_even = rng.filter(|n| is_even(*n));
-    for x in rng_even {
-        println!("{}", x);
+fn sqroot<T: num::traits::Float>(r: T) -> Result<T, String> {
+    if r < num::zero() {
+        return Err("Number cannot be negative!".to_string());
     }
-
-    // map:
-    println!("MAP:");
-    let rng = 0..1000;
-    let rng_even_pow3 = rng
-        .filter(|n| is_even(*n))
-        .map(|n| n * n * n)
-        .collect::<Vec<i32>>();
-    println!("{:?}", rng_even_pow3);
-    println!("TAKE:");
-    let rng = 0..1000;
-    let rng_even_pow3_first5 = rng
-        .filter(|n| is_even(*n))
-        .map(|n| n * n * n)
-        .take(5)
-        .collect::<Vec<i32>>();
-    println!("{:?}", rng_even_pow3_first5);
+    Ok(num::traits::Float::sqrt(r))
 }
 
-fn is_even(n: i32) -> bool {
-    n % 2 == 0
+// trait constraint written with where clause syntax:
+fn sqroot2<T>(r: T) -> Result<T, String>
+where
+    T: num::traits::Float,
+{
+    if r < num::zero() {
+        return Err("Number cannot be negative!".to_string());
+    }
+    Ok(num::traits::Float::sqrt(r))
 }
-// CONSUMERS:
-// [0, 1, 2, 3, 4, ..., 999 ]
-// Some(42)
-// ADAPTERS:
-// FILTER:
-// [0, 2, 4, ..., 996, 998]
-// MAP:
-// [0, 8, 64, ..., 988047936, 994011992]
-// TAKE:
-// [0, 8, 64, 216, 512]
+
+
+// errors: binary operation `<` cannot be applied to type `T`
+// no function or associated item named `sqrt` found for type `T` in
+// the current scope
+// fn sqroot3<T>(r: T) -> Result<T, String> {
+//     if r < 0.0 {
+//         return Err("Number cannot be negative!".to_string());
+//     }
+//     Ok(T::sqrt(r))
+// }
+
+fn main() {
+    println!("The square root of {} is {:?}", 42.0f32, sqroot(42.0f32));
+    println!("The square root of {} is {:?}", 42.0f64, sqroot2(42.0f64));
+    // println!("The square root of {} is {:?}", 42, sqroot(42));
+}
+
+
+
+// The square root of 42 is Ok(6.4807405)
+// The square root of 42 is Ok(6.48074069840786)
+
+// fn multc<T: Trait1, U: Trait1 + Trait2>(x: T, y: U) {}
+// fn multc<T, U>(x: T, y: U) where T: Trait1, U: Trait1 + Trait2 {}
 
 ```
-[Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=8313c5304dc0ebc6abcf4b8eb18d192c&version=stable)
+[Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=8ee3998c06b3f0fa9a81c718792f79e5&version=stable)
