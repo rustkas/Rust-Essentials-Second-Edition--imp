@@ -13,13 +13,13 @@ struct S2 {
 
 impl Draw for S1 {
     fn draw(&self) {
-        println!("{}", self.data_s1);
+        println!("***{}***", self.data_s1);
     }
 }
 
 impl Draw for S2 {
     fn draw(&self) {
-        println!("{}", self.data_s2);
+        println!("***{}***", self.data_s2);
     }
 }
 
@@ -34,14 +34,15 @@ fn main() {
     let s2 = S2 { data_s2: 42.0 };
     draw_object(s1); // OK, S1 implements Draw.
     draw_object(s2); // OK, S2 implements Draw.
-                     // draw_object(42.0); // error: the trait `Draw` is not implemented for the type `_`
+                     // draw_object(42.0); // error[E0277]: the trait bound `{float}: Draw` is not satisfied
 }
 // Going to draw an object:
-// 42
+// ***42***
 // Look how beautiful!
 // Going to draw an object:
-// 42
+// ***42***
 // Look how beautiful!
 
+
 ```
-[Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=91fce126300dfdce54440ad62715d5e4&version=stable)
+[Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=668f28c63b128b26b7341273edfc3542&version=stable)
