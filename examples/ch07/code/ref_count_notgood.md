@@ -1,22 +1,36 @@
 ```rust
-#[allow(unused_variables)]
-fn main() {
-    let score: i32 = 100;
-    // score = 50; // re-assignment of immutable variable
-   	// score = "YOU WON!";
-	// error: mismatched types: expected i32, found reference - expected `i32`, found `&'static str` 
-    let score = "YOU WON!";         
-
-    let player1 = "Rob";
-    let player2 = "Jane";
-	// let player3 = player1 + player2;
-	// error: binary operation `+` cannot be applied to type `&str`
-    let player3 = player1.to_string() + player2;
-    println!("{}", player3);
-    let player3 = format!("{}{}", player1, player2);
-    println!("{}", player3);
+#[allow(dead_code)]
+#[derive(Debug, Copy, Clone)]
+struct Alien<'a> {
+    name: &'a str,
+    no_tentacles: u8,
 }
-// RobJane
-// RobJane
+
+#[allow(dead_code)]
+#[derive(Debug)]
+struct Tentacle<'a> {
+    poison: u8,
+    owner: Alien<'a>,
+}
+
+fn main() {
+    let dhark = Alien {
+        name: "Dharkalen",
+        no_tentacles: 7,
+    };
+    println!("{:?}", dhark);
+    // defining dhark's tentacles:
+    for i in 0u8..dhark.no_tentacles {
+        let tentacle = Tentacle {
+            poison: i * 3,
+            owner: dhark,
+        };
+        if i > 0 {
+            break;
+        }
+        println!("{:?}", tentacle);
+    }
+}
+
 ```
-[Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=62cf15dc9566dbabca63163a3c59f9cb&version=stable)
+[Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=e3ac4d834341e69c17fff409e02f824a&version=stable)
