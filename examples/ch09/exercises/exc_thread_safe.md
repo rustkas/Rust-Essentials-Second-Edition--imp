@@ -1,59 +1,19 @@
 ```rust
-struct Alien {
-    planet: String,
-    n_tentacles: u32,
-}
+use std::thread;
+use std::sync::{Arc, Mutex};
 
-fn square(k: &i32) -> i32 {
-    *k * *k
-}
-
-#[allow(unused_assignments)]
+#[allow(unused_must_use)]
 fn main() {
-    let mut a1 = Box::new(Alien {
-        planet: "Mars".to_string(),
-        n_tentacles: 4,
-    });
-    println!("{}", a1.n_tentacles); // 4
-
-    let a2 = &mut a1;
-    println!("{}", a2.planet); // Mars
-    a2.n_tentacles = 5;
-    // error: cannot borrow `a1.n_tentacles` as immutable because `a1` is also borrowed as mutable
-    // println!("{}", a1.n_tentacles);
-    // error: cannot assign to `a1.planet` because it is borrowed
-    // a1.planet = "Pluto".to_string();
-
-    // putting simple values on the heap:
-    let n = Box::new(42);
-    println!("{}", n); // 42
-                       // *n = 67; // error: cannot assign to immutable `Box` content `*n`
-    let p = *n;
-    println!("{}", p); // 42
-
-    // p = 67; // error: re-assignment of immutable variable `p`
-    // this is allowed:
-    let mut p = *n;
-    p = 67;
-    println!("{}", p); // 67
-    println!("n now still has value {}", n); // 42
-
-    // another reference to n:
-    let q = &*n;
-    // let q = &42;
-    println!("{}", q); // 42
-    println!("{}", square(q)); // 1764
-     println!("{}", q); // 42
+	let data = Arc::new(Mutex::new( vec![7, 13, 42] ));
+    (0..3).map(|i| {
+        let mutex = data.clone();
+        thread::spawn(move || {
+            let mut vec = mutex.lock().unwrap();
+            vec[i] *= 3;
+        }).join()
+    }).collect::<Vec<_>>();
+    println!("{:?}", *data.lock().unwrap());
 }
-
-// 4
-// Mars
-// 42
-// 42
-// 67
-// n now still has value 42
-// 42
-// 1764
-
+// [21, 39, 126]
 ```
-[Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=95810f4eb8c2481626b2ed2427a9c021&version=stable)
+[Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=187d876514264e1aefb44151413e9747&version=stable)
