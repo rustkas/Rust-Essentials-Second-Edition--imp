@@ -6,7 +6,10 @@ fn on_windows() {
 // This machine has Windows as its OS.
 
 fn main() {
-    on_windows();
+    #[cfg(target_os = "windows")]
+    {
+    on_windows();    
+    }
 }
 
 
